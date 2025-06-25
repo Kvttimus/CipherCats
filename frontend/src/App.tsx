@@ -1,33 +1,39 @@
 import { useState, useEffect } from 'react'
+import Signup from './components/ui/Signup';
+import axios from 'axios';
 
 interface MembersResponse {
     members: string[];
 }
 
 function App() {
-    const [data, setData] = useState<MembersResponse | null>(null);
+    const [array, setArray] = useState([]);
+
+    const fetchAPI = async() => {
+        const response = await axios.get("http://127.0.0.1:8080/api/users");
+        console.log(response.data.users);
+        setArray(response.data.users);
+    }
 
     useEffect(() => {
-        fetch("http://localhost:5000/members").then(
-            res => res.json()
-        ).then((data: MembersResponse) => {
-            setData(data);
-            console.log(data);
-        })
-        .catch(err => console.error("Fetch error: ", err))
-  }, [])
+        fetchAPI();
+    }, []);
 
 
-    // Fetching data
-    if (!data) {
-        return <p>Loading...</p>
-    }
-    
+    // Displays data from the backend (main.py)
     return (
         <div>
-            {data.members.map((member, i) => (
-                    <p key={i}>{member}</p>
-            ))}
+            {
+                array.map((user, index) => (
+                    <div key={index}>
+                        <span>{user}</span>
+                        <br></br>
+                    </div>
+                ))
+            }
+            <>
+                <Signup />
+            </>
         </div>
     )
 }
