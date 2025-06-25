@@ -1,21 +1,35 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
+
+interface MembersResponse {
+    members: string[];
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [data, setData] = useState<MembersResponse | null>(null);
 
-  return (
-    <>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-      </div>
-    </>
-  )
+    useEffect(() => {
+        fetch("http://localhost:5000/members").then(
+            res => res.json()
+        ).then((data: MembersResponse) => {
+            setData(data);
+            console.log(data);
+        })
+        .catch(err => console.error("Fetch error: ", err))
+  }, [])
+
+
+    // Fetching data
+    if (!data) {
+        return <p>Loading...</p>
+    }
+    
+    return (
+        <div>
+            {data.members.map((member, i) => (
+                    <p key={i}>{member}</p>
+            ))}
+        </div>
+    )
 }
 
 export default App
