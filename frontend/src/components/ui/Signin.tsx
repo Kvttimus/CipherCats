@@ -10,7 +10,6 @@ const Signin = () => {
 
     const { session, signInUser } = UserAuth();
     const navigate = useNavigate();
-    // console.log(session);  // DEBUG STATEMENT
 
     const handleSignIn = async (e: React.FormEvent) => {
         e.preventDefault();

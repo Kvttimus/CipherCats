@@ -6,9 +6,6 @@ const Home = () => {
     const { session, signOut, loading } = UserAuth();
     const navigate = useNavigate();
 
-    console.log("Home: session: ", session);  // DEBUG STATEMENT
-    console.log("Home: loading: ", loading);  // DEBUG STATEMENT
-
     const handleSignOut = async() => {
         try {
             await signOut();

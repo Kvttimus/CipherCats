@@ -32,7 +32,6 @@ export const AuthContextProvider = ({children}: {children: React.ReactNode}) => 
     useEffect(() => {
         // Get initial session
         supabase.auth.getSession().then(({data: {session}}) => {
-            console.log("AuthContext: Initial session: ", session); // DEBUG STATEMENT
             setSession(session);
             setLoading(false);
         });
@@ -41,14 +40,12 @@ export const AuthContextProvider = ({children}: {children: React.ReactNode}) => 
         const {
             data: { subscription },
         } = supabase.auth.onAuthStateChange((_event, session) => {
-            console.log("AuthContext: Auth state changed: ", _event, session); // DEBUG STATEMENT
             setSession(session);
             setLoading(false);
         });
 
         // Cleanup subscription amount
         return () => {
-            console.log("AuthContext: Cleaning up subscription");  // DEBUG STATEMENT
             subscription.unsubscribe();
         };
     }, []);
