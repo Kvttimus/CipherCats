@@ -1,6 +1,6 @@
 import { UserAuth } from '@/context/AuthContext';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [email, setEmail] = useState<string>('')
@@ -9,7 +9,30 @@ const Signup = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const { session, signUpNewUser } = UserAuth();
+    const navigate = useNavigate();
     console.log(session);
+
+    const handleSignUp = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');  // clears previous errors
+
+        try {
+            const result = await signUpNewUser(email, password);
+
+            if (result.success) {
+                navigate('/home');
+            }
+            else {
+                // Handle error msg from signUpNewUser
+                setError(result.error?.message || result.error || "Failed to create an account. Please try again.");
+            }
+        } catch (error: any) {
+            setError(error?.message || "An error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
     <div>
@@ -26,4 +49,4 @@ const Signup = () => {
     );
 }
 
-export default Signup
+export default Signup;
