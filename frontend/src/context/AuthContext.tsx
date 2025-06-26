@@ -6,12 +6,14 @@ type AuthContextType = {
     signUpNewUser: (email: string, password: string) => Promise<{ success: boolean; error?: any; data?: any}>;
     signInUser: (email: string, password: string) => Promise<{ success: boolean; error?: any; data?: any}>;
     signOut: () => Promise<void>;
+    loading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthContextProvider = ({children}: {children: React.ReactNode}) => {
     const [session, setSession] = useState<any>(undefined)
+    const [loading, setLoading] = useState(true);
 
     // Sign up function
     const signUpNewUser = async (email: string, password: string): Promise<{ success: boolean; error?: any; data?: any }> => {
@@ -28,14 +30,28 @@ export const AuthContextProvider = ({children}: {children: React.ReactNode}) => 
     };
 
     useEffect(() => {
+        // Get initial session
         supabase.auth.getSession().then(({data: {session}}) => {
+            console.log("AuthContext: Initial session: ", session); // DEBUG STATEMENT
             setSession(session);
+            setLoading(false);
         });
 
-        supabase.auth.onAuthStateChange((_event, session) => {
+        // Listen for authentication changes
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            console.log("AuthContext: Auth state changed: ", _event, session); // DEBUG STATEMENT
             setSession(session);
-        })
-    })
+            setLoading(false);
+        });
+
+        // Cleanup subscription amount
+        return () => {
+            console.log("AuthContext: Cleaning up subscription");  // DEBUG STATEMENT
+            subscription.unsubscribe();
+        };
+    }, []);
 
     // Sign in function
     const signInUser = async (email: string, password: string): Promise<{ success: boolean; error?: any; data?: any }> => {
@@ -65,11 +81,11 @@ export const AuthContextProvider = ({children}: {children: React.ReactNode}) => 
     }
 
     return (
-        <AuthContext.Provider value={{ session, signUpNewUser, signInUser, signOut }}>
+        <AuthContext.Provider value={{ session, signUpNewUser, signInUser, signOut, loading }}>
             {children}
         </AuthContext.Provider>
     )
-}
+}   
 
 export const UserAuth = () => {
     const context = useContext(AuthContext);
