@@ -3,7 +3,7 @@ import App from "@/App";
 import Home from "@/pages/Home";
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
-import PrivateRoute from "@/components/ui/PrivateRoute";
+import PrivateRoute from "@/components/PrivateRoute";
 import Play from "@/pages/storylines/Play";
 import Dashboard from "@/pages/Dashboard";
 import Settings from "@/pages/Settings";
