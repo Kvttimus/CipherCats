@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Signup from './components/ui/Signup';
+import Signup from './pages/Signup';
 import axios from 'axios';
 
 interface MembersResponse {

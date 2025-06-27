@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserAuth } from "@/context/AuthContext";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const { session, signOut, loading } = UserAuth();
@@ -27,8 +27,11 @@ const Home = () => {
     return (
         <div>
             <h1>Home</h1>
-            <h2>Welcome {session?.user?.email}</h2>
+            <h2>Welcome back {session?.user?.email}</h2>
             <div>
+                <p><Link to='/home/play'>Play</Link></p>
+                <p><Link to='/home/dashboard'>Dashboard</Link></p>
+                <p><Link to='/home/settings'>Settings</Link></p>
                 <p 
                     onClick={handleSignOut}
                     className="hover:cursor-pointer border inline-block px-4 py-3 mt-4">Sign out
