@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { AuthCard } from "@/components/ui/authCard";
 import { AuthHeader } from "@/components/ui/authHeader";
 import { Card, CardContent } from "@/components/ui/card";
-import { AsciiCat } from "@/components/ui/asciiCat";
 import { Label } from "@/components/ui/label";
 
 
@@ -50,7 +49,6 @@ const Signin = () => {
 
             <Card className="w-full max-w-md border-cyan-500 bg-gray-900 text-white shadow-xl z-10">
                 <CardContent className="p-6 space-y-6">
-                    <AsciiCat />
 
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-cyan-400">Sign In</h2>
