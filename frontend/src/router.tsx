@@ -1,6 +1,8 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+
 import App from "@/App";
 import Home from "@/pages/Home";
+import AuthPage from "@/pages/AuthPage";
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import PrivateRoute from "@/components/PrivateRoute";
@@ -18,8 +20,11 @@ import CodebreakerLab5 from "@/pages/storylines/codebreakerQuest/lab5";
 
 export const router = createBrowserRouter([
     { path: "/", element: <App /> },
-    { path: "/signup", element: <Signup /> },
-    { path: "/signin", element: <Signin /> },
+    { path: "/auth", element: <AuthPage /> },
+    { path: "/signup", element: <Navigate to="/auth" replace /> },
+    { path: "/signin", element: <Navigate to="/auth" replace /> },
+    // { path: "/signup", element: <Signup /> },
+    // { path: "/signin", element: <Signin /> },
     { path: "/home", element: <PrivateRoute><Home /></PrivateRoute> },
     { path: "/home/play", element: <PrivateRoute><Play /></PrivateRoute>},
     { path: "/home/dashboard", element: <PrivateRoute><Dashboard /></PrivateRoute>},
