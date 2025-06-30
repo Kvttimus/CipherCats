@@ -54,7 +54,7 @@ function App() {
                     <div className="w-8 h-8 border-2 border-green-500/50 border-t-green-500 rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-green-400 font-mono">Initializing CipherCats...</p>
                 </div>
-            </div>
+           </div>
         </div>
     )   
 }

@@ -26,64 +26,6 @@
     }
 }
 
-@keyframes glitch {
-
-    0%,
-    100% {
-        transform: translate(0);
-    }
-
-    20% {
-        transform: translate(-2px, 2px);
-    }
-
-    40% {
-        transform: translate(-2px, -2px);
-    }
-
-    60% {
-        transform: translate(2px, 2px);
-    }
-
-    80% {
-        transform: translate(2px, -2px);
-    }
-}
-
-@keyframes neon-pulse {
-
-    0%,
-    100% {
-        text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
-    }
-
-    50% {
-        text-shadow: 0 0 2px #00ff41, 0 0 5px #00ff41, 0 0 8px #00ff41;
-    }
-}
-
-@keyframes terminal-cursor {
-
-    0%,
-    50% {
-        opacity: 1;
-    }
-
-    51%,
-    100% {
-        opacity: 0;
-    }
-}
-
-@keyframes circuit-flow {
-    0% {
-        transform: translateX(-100%);
-    }
-
-    100% {
-        transform: translateX(100%);
-    }
-}
 
 /* Matrix Rain Effect */
 .matrix-rain {
@@ -98,70 +40,11 @@
 
 .matrix-char {
     position: absolute;
-    color: #00ff41;
+    color: #ff0000;
     font-family: "Fira Code", monospace;
-    font-size: 14px;
+    font-size: 16px;
     animation: matrix-rain 3s linear infinite;
-    opacity: 0.7;
-}
-
-/* Glitch Text Effect */
-.glitch-text {
-    font-family: "Orbitron", monospace;
-    animation: glitch 0.3s infinite;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.glitch-text::before {
-    animation: glitch 0.3s infinite;
-    color: #ff0040;
-    z-index: -1;
-}
-
-.glitch-text::after {
-    animation: glitch 0.3s infinite reverse;
-    color: #00ffff;
-    z-index: -2;
-}
-
-/* Neon Glow Effects */
-.neon-green {
-    color: #00ff41;
-    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
-}
-
-.neon-blue {
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
-}
-
-.neon-red {
-    color: #ff0040;
-    text-shadow: 0 0 5px #ff0040, 0 0 10px #ff0040, 0 0 15px #ff0040;
-}
-
-/* Terminal Cursor */
-.terminal-cursor::after {
-    content: "|";
-    animation: terminal-cursor 1s infinite;
-    color: #00ff41;
-}
-
-/* Circuit Board Pattern */
-.circuit-bg {
-    background-image: linear-gradient(90deg, #00ff41 1px, transparent 1px),
-        linear-gradient(180deg, #00ff41 1px, transparent 1px);
-    background-size: 20px 20px;
-    opacity: 0.1;
+    opacity: 0.9;
 }
 
 /* Custom Scrollbar */
@@ -174,7 +57,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #00ff41;
+    background: #ff0040;
     border-radius: 4px;
 }
 
